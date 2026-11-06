@@ -1,0 +1,125 @@
+.laundry-page h1 {
+  font: 600 34px "Space Grotesk";
+  letter-spacing: -1.5px;
+  margin: 0;
+}
+
+.laundry-card {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #eceae7;
+  border-radius: 14px;
+  display: flex;
+  gap: 14px;
+  margin-top: 32px;
+  max-width: 650px;
+  padding: 20px;
+}
+
+.laundry-icon {
+  align-items: center;
+  background: #f1f6e9;
+  border-radius: 10px;
+  color: #78954c;
+  display: flex;
+  height: 48px;
+  justify-content: center;
+  width: 48px;
+}
+
+.laundry-card div:nth-child(2) {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.laundry-card small {
+  color: #969199;
+  font-size: 11px;
+}
+
+.laundry-status {
+  background: #e8f4e9;
+  border-radius: 20px;
+  color: #61946a;
+  font-size: 10px;
+  padding: 6px 10px;
+}
+
+.laundry-status.is-running {
+  background: #f6f1df;
+  color: #9c813e;
+}
+
+.laundry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 30px;
+  max-width: 650px;
+}
+
+.laundry-form label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.laundry-input-row {
+  align-items: center;
+  display: flex;
+  gap: 9px;
+}
+
+.laundry-input-row svg {
+  color: #969199;
+}
+
+.laundry-input-row input {
+  border: 1px solid #dedbd5;
+  border-radius: 7px;
+  color: #55515a;
+  font: inherit;
+  padding: 10px;
+  width: 92px;
+}
+
+.laundry-input-row input::placeholder {
+  color: #aaa6ad;
+}
+
+.laundry-input-row button,
+.laundry-clear {
+  align-items: center;
+  background: #292832;
+  border: 0;
+  border-radius: 7px;
+  color: #fff;
+  display: flex;
+  font-size: 11px;
+  gap: 6px;
+  padding: 11px 14px;
+}
+
+.laundry-input-row button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.laundry-clear {
+  background: #f5f3ef;
+  color: #77737c;
+  margin-top: 14px;
+}
+
+@media (max-width: 600px) {
+  .laundry-card,
+  .laundry-input-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .laundry-status {
+    margin-left: 62px;
+  }
+}

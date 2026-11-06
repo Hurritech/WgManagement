@@ -1,0 +1,32 @@
+.calendar-page h1 {
+  font: 600 34px "Space Grotesk";
+  letter-spacing: -1.5px;
+  margin: 0;
+}
+
+.calendar-form {
+  align-items: center;
+  display: flex;
+  gap: 9px;
+  margin-top: 30px;
+  max-width: 560px;
+}
+
+.calendar-form > svg { color: #78954c; }
+.calendar-form input { border: 1px solid #dedbd5; border-radius: 7px; font: inherit; min-width: 0; padding: 10px; }
+.calendar-form input:nth-of-type(1) { width: 120px; }
+.calendar-form input:nth-of-type(2) { width: 80px; }
+.calendar-form input:nth-of-type(3) { flex: 1; }
+.calendar-form button { align-items: center; background: #292832; border: 0; border-radius: 7px; color: #fff; display: flex; font-size: 11px; gap: 5px; padding: 11px 13px; }
+
+.calendar-list { margin-top: 24px; max-width: 560px; }
+.calendar-date { align-items: center; border-top: 1px solid #eceae7; display: flex; justify-content: space-between; padding: 14px 0; }
+.calendar-date span { color: #78954c; font-size: 13px; margin-left: 12px; }
+.calendar-date p { color: #77727b; font-size: 13px; margin: 5px 0 0; overflow-wrap: anywhere; }
+.calendar-date button { background: none; border: 0; color: #aaa6ad; padding: 5px; }
+.calendar-date button:hover { color: #c87862; }
+.calendar-empty { color: #969199; font-size: 12px; }
+
+@media (max-width: 600px) {
+  .calendar-form { align-items: stretch; flex-direction: column; }
+}

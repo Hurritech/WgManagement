@@ -1,0 +1,35 @@
+nav button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 11px;
+  border-radius: 7px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  color: #aaa7b3;
+  font: inherit;
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+
+nav button.active {
+  background: #35333d;
+  color: #fff;
+}
+
+nav button span {
+  margin-left: auto;
+  font-size: 11px;
+  background: #484550;
+  color: #d9d6e2;
+  border-radius: 8px;
+  padding: 2px 7px;
+}
+
+.sidebar-counter.is-warning {
+  background: #e7957f;
+  color: #fff;
+}
