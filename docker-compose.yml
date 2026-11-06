@@ -1,0 +1,32 @@
+name: wg
+
+services:
+  backend:
+    image: ghcr.io/hurritech/wgmanagement-backend:${IMAGE_TAG:?required}
+    restart: unless-stopped
+    environment:
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:?required}
+      DJANGO_DEBUG: "0"
+      DJANGO_ALLOWED_HOSTS: wg.sevenna.de
+      DATABASE_PATH: /data/db.sqlite3
+    volumes:
+      - backend_data:/data
+    networks:
+      proxy:
+        aliases:
+          - wg-backend
+
+  frontend:
+    image: ghcr.io/hurritech/wgmanagement-frontend:${IMAGE_TAG:?required}
+    restart: unless-stopped
+    networks:
+      proxy:
+        aliases:
+          - wg-frontend
+
+volumes:
+  backend_data:
+
+networks:
+  proxy:
+    external: true
