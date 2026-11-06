@@ -1,0 +1,73 @@
+name: Deploy WgManagement
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_sha:
+        description: "Full 40-character commit SHA to deploy"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wg-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to Sevenna
+    runs-on: ubuntu-latest
+    environment: DEPLOYMENT
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate commit
+        env:
+          SHA: ${{ inputs.commit_sha }}
+        run: |
+          set -euo pipefail
+
+          [[ "$SHA" =~ ^[0-9a-f]{40}$ ]] || {
+            echo "Invalid commit SHA"
+            exit 1
+          }
+
+          git fetch origin master
+          git cat-file -e "${SHA}^{commit}"
+          git merge-base --is-ancestor "$SHA" origin/master
+
+      - name: Set up SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          umask 077
+
+          mkdir -p ~/.ssh
+
+          test -n "$DEPLOY_SSH_KEY"
+          test -n "$DEPLOY_KNOWN_HOSTS"
+
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/wg_deploy
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+          ssh-keygen -y -P "" -f ~/.ssh/wg_deploy > /dev/null
+
+      - name: Deploy release
+        env:
+          SHA: ${{ inputs.commit_sha }}
+        run: |
+          ssh \
+            -i ~/.ssh/wg_deploy \
+            -o IdentitiesOnly=yes \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes \
+            wg-deploy@91.210.224.148 \
+            "deploy $SHA"
